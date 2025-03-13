@@ -84,7 +84,7 @@ const handleUnAuthorizedError = async () => {
       },
     };
     const response = await fetchWithTimeOut({
-      url: `${"http://localhost:5000"}/auth/access-token`,
+      url: `${getBaseUrl()}/auth/access-token`,
       requestOptions,
     });
     if (response.status === 200) {
@@ -108,3 +108,8 @@ export const addHeaders = async ({ contentType = "application/json" }) => {
     Authorization: `Bearer ${accessToken}`,
   };
 };
+
+export const getBaseUrl = () =>
+  process.env.APP_VARIANT === "dev"
+    ? process.env.EXPO_PUBLIC_BASE_API_URL_DEVELOPEMENT
+    : process.env.EXPO_PUBLIC_BASE_API_URL_PRODUCTION;
