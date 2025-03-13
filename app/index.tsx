@@ -1,15 +1,14 @@
-import { Text, View } from "react-native";
+import React from "react";
+import { Text } from "react-native-paper";
+import { useAuthContext } from "@/src/common/context/useAuthContext";
+import Login from "@/app/auth/login";
+import Tabs from "@/app/task/tabs";
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
-}
+const Main = () => {
+  const { isLoading, authenticated } = useAuthContext();
+  if (isLoading) return <Text>Wait</Text>;
+  else if (!authenticated) return <Login />;
+  return <Tabs />;
+};
+
+export default Main;
