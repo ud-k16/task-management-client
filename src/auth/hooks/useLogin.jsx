@@ -1,37 +1,55 @@
 import { useState } from "react";
-import Constants from "expo-constants";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { fetchWithTimeOut } from "@/src/utils/helperFunctions";
 import { useAuthContext } from "@/src/auth/context/useAuthContext";
+import { getBaseUrl } from "../../utils/helperFunctions";
 
 const useLogin = () => {
   const [state, setState] = useState({
     isLoading: false,
-    userId: "",
+    email: "",
     password: "",
+    emailError: "",
+    passwordError: "",
     loginError: false,
   });
-  const { API_URL } = Constants.expoConfig.extra;
+
   const { setItem: setUser } = useAsyncStorage("user");
   const { setState: setAuthState } = useAuthContext();
 
+  const validateEmail = () => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(state.email);
+  };
   const authenticateUser = async ({}) => {
     try {
       setState((prev) => ({
         ...prev,
         isLoading: true,
         loginError: "",
+        emailError: "",
+        passwordError: "",
       }));
-      if (!state.userId && !state.password) {
+      if (!state.email && !state.password) {
         setState((prev) => ({
           ...prev,
           isLoading: false,
-          loginError: "Enter All Fields",
+          emailError: "Enter Email",
+          passwordError: "Enter Password",
+        }));
+        return;
+      }
+      const isValidEmail = validateEmail();
+      if (!isValidEmail) {
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          emailError: "Enter valid Email",
         }));
         return;
       }
       const data = {
-        userId: state.userId,
+        email: state.email,
         password: state.password,
       };
       const requestOptions = {
@@ -42,7 +60,7 @@ const useLogin = () => {
         body: JSON.stringify(data),
       };
       const response = await fetchWithTimeOut({
-        url: `${API_URL}/auth/login`,
+        url: `${getBaseUrl}/auth/login`,
         requestOptions,
       });
 
@@ -72,7 +90,6 @@ const useLogin = () => {
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        loginError: "Server down try after sometime",
       }));
     }
   };

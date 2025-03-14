@@ -1,4 +1,5 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import useLogout from "../auth/hooks/useLogout";
 
 export const fetchWithTimeOut = async ({
   url,
@@ -76,6 +77,7 @@ const handleUnAuthorizedError = async () => {
   try {
     const { getItem: getRefreshToken } = useAsyncStorage("REFRESH_TOKEN");
     const { setItem: setAccessToken } = useAsyncStorage("ACCESS_TOKEN");
+    const { logoutUser } = useLogout();
     const refreshToken = await getRefreshToken();
     const requestOptions = {
       method: "GET",
@@ -92,6 +94,7 @@ const handleUnAuthorizedError = async () => {
       if (result?.status) await setAccessToken(result.accessToken);
     } else if (response.status === 401) {
       // loggout the user stating session expired
+      logoutUser();
     }
   } catch (error) {
     handleResponseError(error);
