@@ -86,7 +86,7 @@ const handleUnAuthorizedError = async () => {
       },
     };
     const response = await fetchWithTimeOut({
-      url: `${getBaseUrl()}/auth/access-token`,
+      url: `${process.env.EXPO_PUBLIC_BASE_API_URL_PRODUCTION}/auth/access-token`,
       requestOptions,
     });
     if (response.status === 200) {

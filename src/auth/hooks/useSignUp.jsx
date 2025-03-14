@@ -2,16 +2,16 @@ import { useState } from "react";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { fetchWithTimeOut } from "@/src/utils/helperFunctions";
 import { useAuthContext } from "@/src/auth/context/useAuthContext";
-import { getBaseUrl } from "../../utils/helperFunctions";
-
-const useLogin = () => {
+const useSignUp = () => {
   const [state, setState] = useState({
     isLoading: false,
+    name: "",
     email: "",
     password: "",
+    nameError: "",
     emailError: "",
     passwordError: "",
-    loginError: false,
+    signUpError: false,
   });
 
   const { setItem: setUser } = useAsyncStorage("user");
@@ -21,19 +21,20 @@ const useLogin = () => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(state.email);
   };
-  const authenticateUser = async ({}) => {
+  const signupUser = async ({}) => {
     try {
       setState((prev) => ({
         ...prev,
         isLoading: true,
-        loginError: "",
+        signUpError: "",
         emailError: "",
         passwordError: "",
       }));
-      if (!state.email && !state.password) {
+      if (!state.email && !state.password && !state.name) {
         setState((prev) => ({
           ...prev,
           isLoading: false,
+          nameError: "Enter Name",
           emailError: "Enter Email",
           passwordError: "Enter Password",
         }));
@@ -60,7 +61,7 @@ const useLogin = () => {
         body: JSON.stringify(data),
       };
       const response = await fetchWithTimeOut({
-        url: `${process.env.EXPO_PUBLIC_BASE_API_URL_PRODUCTION}/auth/login`,
+        url: `${process.env.EXPO_PUBLIC_BASE_API_URL_PRODUCTION}/auth/signup`,
         requestOptions,
       });
 
@@ -78,7 +79,7 @@ const useLogin = () => {
       } else {
         setState((prev) => ({
           ...prev,
-          loginError: "Invalid credentials",
+          signUpError: "Something went wrong",
         }));
       }
       // toggle loading indicator
@@ -97,7 +98,7 @@ const useLogin = () => {
   return {
     ...state,
     setState,
-    authenticateUser,
+    signupUser,
   };
 };
-export default useLogin;
+export default useSignUp;

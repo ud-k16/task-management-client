@@ -1,20 +1,21 @@
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import useSignUp from "../../src/auth/hooks/useSignUp";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
-import useLogin from "@/src/auth/hooks/useLogin";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Link } from "expo-router";
-
-const Login = () => {
+const SignUp = () => {
+  const { colors } = useTheme();
   const {
     isLoading,
+    name,
+    nameError,
     email,
     password,
     emailError,
     passwordError,
     setState,
-    authenticateUser,
-  } = useLogin();
-  const { colors } = useTheme();
+    signupUser,
+  } = useSignUp();
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -37,9 +38,9 @@ const Login = () => {
     },
     errorTextStyle: {
       color: colors.error,
-      marginBottom: moderateScale(20),
+      marginBottom: moderateScale(10),
     },
-    signUpTextLink: {
+    loginTextLink: {
       color: colors.primary,
       marginTop: moderateScale(20),
       textAlign: "center",
@@ -47,6 +48,13 @@ const Login = () => {
   });
   return (
     <View style={styles.container}>
+      <TextInput
+        label="Name"
+        mode="outlined"
+        value={name}
+        onChangeText={(text) => setState((prev) => ({ ...prev, name: text }))}
+      />
+      <Text style={styles.errorTextStyle}>{nameError}</Text>
       <TextInput
         label="Email"
         mode="outlined"
@@ -71,13 +79,12 @@ const Login = () => {
         style={styles.buttonStyle}
         labelStyle={styles.buttonLabelStyle}
         contentStyle={styles.buttonContentStyle}
-        onPress={authenticateUser}
+        onPress={signupUser}
       />
-      <Link href={"/auth/signup"} style={styles.signUpTextLink}>
-        Signup to create an account
+      <Link href={"/auth/login"} style={styles.loginTextLink}>
+        already has an account ? click here to login
       </Link>
     </View>
   );
 };
-
-export default Login;
+export default SignUp;
