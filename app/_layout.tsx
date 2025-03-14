@@ -4,6 +4,7 @@ import { Appearance } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import { darkTheme, lightTheme } from "@/src/utils/themes";
 import AuthContextProvider from "@/src/auth/context/useAuthContext";
+import Header from "@/src/common/components/Header";
 
 export default function RootLayout() {
   const [colorScheme, setColorScheme] = useState(Appearance.getColorScheme());
@@ -22,7 +23,10 @@ export default function RootLayout() {
       <AuthContextProvider>
         <Stack
           screenOptions={{
-            headerShown: false,
+            headerShown: true,
+            header: (props) => (
+              <Header title={props.options.title} {...props} />
+            ),
           }}
         />
       </AuthContextProvider>

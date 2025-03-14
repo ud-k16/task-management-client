@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Menu, useTheme } from "react-native-paper";
 import useLogout from "@/src/auth/hooks/useLogout";
 
-const Header = ({ title = "" }) => {
+const Header = ({ title = "Task Management" }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { logoutUser } = useLogout();
   const Themes = useTheme();
@@ -14,28 +14,18 @@ const Header = ({ title = "" }) => {
 
   const styles = StyleSheet.create({
     container: {
-      height: moderateScale(40),
+      height: moderateScale(70),
       borderWidth: 0,
-      borderBottomWidth: moderateScale(1),
-      marginBottom: moderateScale(2),
       backgroundColor: Themes.colors.secondary,
       alignItems: "center",
       justifyContent: "space-evenly",
       flexDirection: "row",
-      minHeight: moderateScale(70),
     },
     titleTextStyle: {
       fontWeight: 600,
       fontSize: moderateScale(26),
-      textTransform: "uppercase",
       flex: 0.8,
-      color: Themes.colors.secondary,
-    },
-    menuContainer: {
-      color: Themes.colors.primary,
-      backgroundColor: Themes.colors.background,
-      width: "50%",
-      elevation: 16,
+      color: Themes.colors.onSecondary,
     },
   });
   return (

@@ -7,7 +7,6 @@ const Login = () => {
   const { email, password, setState } = useLogin();
   return (
     <View style={styles.container}>
-      <Header title="Login" />
       <TextInput
         label="Email"
         mode="outlined"
