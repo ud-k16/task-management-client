@@ -83,20 +83,7 @@ const TaskCard = ({
       flex: 1,
       justifyContent: "space-evenly",
     },
-    teacherTextStyle: {
-      color: colors.lightFadedGreen,
-    },
-    textInputStyle: {
-      alignSelf: "center",
-      width: "90%",
-      height: moderateScale(60),
-      elevation: 6,
-      backgroundColor: colors.white,
-      // borderWidth: moderateScale(2),
-      borderRadius: moderateScale(5),
-      paddingHorizontal: moderateScale(10),
-      fontSize: moderateScale(17),
-    },
+
     taskTextStyle: {
       fontWeight: 600,
       fontSize: moderateScale(20),
