@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import {
-  fetchWithTimeOut,
-  handleResponseError,
-} from "@/src/utils/helperFunctions";
+import { fetchWithTimeOut } from "@/src/utils/helperFunctions";
 import { useAuthContext } from "@/src/auth/context/useAuthContext";
-import { getBaseUrl } from "../../utils/helperFunctions";
 import { Keyboard } from "react-native";
+import { useErrorContext } from "@/src/common/context/useErrorContext";
 
 const useLogin = () => {
   const [state, setState] = useState({
@@ -20,6 +17,7 @@ const useLogin = () => {
 
   const { setItem: setUser } = useAsyncStorage("user");
   const { setState: setAuthState } = useAuthContext();
+  const { showError } = useErrorContext();
 
   const validateEmail = () => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -97,7 +95,7 @@ const useLogin = () => {
         ...prev,
         isLoading: false,
       }));
-      handleResponseError(error);
+      showError();
     }
   };
 

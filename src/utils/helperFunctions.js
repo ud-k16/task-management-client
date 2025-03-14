@@ -1,5 +1,6 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import useLogout from "../auth/hooks/useLogout";
+import { useErrorContext } from "../common/context/useErrorContext";
 
 export const fetchWithTimeOut = async ({
   url,
@@ -28,19 +29,23 @@ export const fetchWithTimeOut = async ({
     return response;
   } catch (error) {
     console.log("Error occured in the Fetch With TimeOut Function", error);
-    throw new Error(error);
+    throw error;
   }
 };
 
 export const handleResponseError = (error) => {
+  const { showError } = useErrorContext();
   try {
     if (error instanceof TypeError) {
       console.log("Network Error ");
+      showError();
     } else if (error instanceof DOMException && error.name === "AbortError") {
       console.log("Fetch request aborted");
+      showError();
     } else console.log(error.message);
   } catch (error) {
     console.log("Error in handle Response Error function");
+    showError();
   }
 };
 
