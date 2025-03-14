@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuthContext } from "@/src/common/context/useAuthContext";
+import { useAuthContext } from "@/src/auth/context/useAuthContext";
 import Login from "@/app/auth/login";
 import Tabs from "@/app/task/tabs";
 import Loader from "@/src/common/components/Loader";

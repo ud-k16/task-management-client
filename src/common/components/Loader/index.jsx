@@ -1,10 +1,10 @@
-import { useTheme } from "react-native-paper";
-import { ActivityIndicator } from "react-native-web";
+import { ActivityIndicator, useTheme } from "react-native-paper";
+
 const Loader = ({ isLoading, color, size = "large" }) => {
   const themes = useTheme();
   return (
     <ActivityIndicator
-      animating={isLoading}
+      animating={isLoading ?? false}
       color={color ? color : themes.colors.primary}
       size={size}
     />
