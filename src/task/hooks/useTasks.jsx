@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTaskContext } from "../context/useTaskContext";
 import {
   addHeaders,
+  fetchWithTimeOut,
   handleResponse,
   handleResponseError,
 } from "@/src/utils/helperFunctions";
@@ -13,6 +14,8 @@ const useTasks = () => {
   const { setState: setTaskState } = useTaskContext();
 
   const fetchTaskFromServer = async () => {
+    console.log("fetchTaskFromServer");
+
     try {
       setState((prev) => ({
         ...prev,
@@ -29,6 +32,7 @@ const useTasks = () => {
         requestOptions,
       });
       const result = await handleResponse(response);
+
       if (result?.status) {
         setTaskState((prev) => ({
           ...prev,

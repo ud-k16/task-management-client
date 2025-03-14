@@ -16,6 +16,8 @@ const useLogin = () => {
   });
 
   const { setItem: setUser } = useAsyncStorage("user");
+  const { setItem: setRefreshToken } = useAsyncStorage("REFRESH_TOKEN");
+  const { setItem: setAccessToken } = useAsyncStorage("ACCESS_TOKEN");
   const { setState: setAuthState } = useAuthContext();
   const { showError } = useErrorContext();
 
@@ -70,13 +72,16 @@ const useLogin = () => {
 
       const result = await response.json();
       if (result.status) {
-        await setUser(JSON.stringify(result?.data));
+        await setUser(JSON.stringify(result.data.user));
+        await setRefreshToken(result.data.token.refreshToken);
+        await setAccessToken(result.data.token.accessToken);
+
         // updating auth context values
         setAuthState((prev) => {
           return {
             ...prev,
             authenticated: true,
-            user: result.data,
+            user: result.data.user,
           };
         });
       } else {

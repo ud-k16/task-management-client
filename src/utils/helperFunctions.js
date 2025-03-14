@@ -59,7 +59,8 @@ export const handleResponseError = (error) => {
 export const handleResponse = async (response) => {
   try {
     if (response.status === 200) {
-      return await response.json();
+      const result = await response.json();
+      return result;
     } else if (response.status === 401) {
       handleUnAuthorizedError();
     } else if (response.status === 500) {
@@ -73,6 +74,8 @@ export const handleResponse = async (response) => {
 };
 const handleUnAuthorizedError = async () => {
   try {
+    console.log("handleUnAuthorizedError");
+
     const { getItem: getRefreshToken } = useAsyncStorage("REFRESH_TOKEN");
     const { setItem: setAccessToken } = useAsyncStorage("ACCESS_TOKEN");
     const { logoutUser } = useLogout();

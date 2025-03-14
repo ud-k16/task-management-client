@@ -1,5 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import TaskHome from "./home";
 import AddTask from "./addTask";
 import ModifyTask from "./modifyTask";
@@ -21,7 +23,7 @@ const Tabs = () => {
         component={TaskHome}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="Tasks" size={24} color="black" />
+            <Ionicons name="home-outline" size={24} color="black" />
           ),
         }}
       />
@@ -30,7 +32,7 @@ const Tabs = () => {
         component={AddTask}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="Tasks" size={24} color="black" />
+            <MaterialIcons name="add-task" size={24} color="black" />
           ),
         }}
       />
@@ -39,7 +41,11 @@ const Tabs = () => {
         component={ModifyTask}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="Tasks" size={24} color="black" />
+            <MaterialCommunityIcons
+              name="playlist-edit"
+              size={24}
+              color="black"
+            />
           ),
         }}
       />
