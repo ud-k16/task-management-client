@@ -3,10 +3,10 @@ import { Pressable, StyleSheet, View } from "react-native";
 import Foundation from "@expo/vector-icons/Foundation";
 import { useState } from "react";
 import moderateScale from "@/src/utils/responsiveScale";
-import { useTheme } from "react-native-paper";
+import { Text, TextInput, useTheme } from "react-native-paper";
 
 const TaskCard = ({
-  index = 0,
+  id = 0,
   task,
   description,
   editable = false,
@@ -17,10 +17,9 @@ const TaskCard = ({
   const [editVisible, setEditVisible] = useState(false);
   const [state, setState] = useState({
     task,
-
     description,
     taskError: "",
-    teacherError: "",
+
     descriptionError: "",
   });
   const showEdit = () => setEditVisible(true);
@@ -28,9 +27,8 @@ const TaskCard = ({
   const validation = () => {
     if (state.task && state.description) {
       onEdit({
-        index,
+        id,
         task: state.task,
-
         description: state.description,
       });
       hideEdit();
@@ -57,12 +55,13 @@ const TaskCard = ({
   };
   const styles = StyleSheet.create({
     courseDatacontainer: {
-      minHeight: moderateScale(30),
+      minHeight: moderateScale(50),
+      height: moderateScale(100),
       flexDirection: "row",
       width: "90%",
       alignSelf: "center",
       alignItems: "center",
-      backgroundColor: colors.white,
+      backgroundColor: colors.background,
       marginVertical: moderateScale(5),
       padding: moderateScale(10),
       borderRadius: moderateScale(5),

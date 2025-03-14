@@ -97,22 +97,9 @@ const useHelpers = () => {
       handleResponseError(error);
     }
   };
-  /**
-   *  returns header option object for fetch request
-   */
-  const addHeaders = async ({ contentType = "application/json" }) => {
-    const accessToken = await getAccessToken();
-    console.log(accessToken, "accesssssssssss");
-
-    return {
-      "Content-Type": contentType,
-      Authorization: `Bearer ${accessToken}`,
-    };
-  };
 
   return {
     fetchWithTimeOut,
-    addHeaders,
     handleResponse,
     handleResponseError,
     handleUnAuthorizedError,

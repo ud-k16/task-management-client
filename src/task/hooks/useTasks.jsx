@@ -1,29 +1,30 @@
 import { useEffect, useState } from "react";
 import { useTaskContext } from "../context/useTaskContext";
 import useHelpers from "@/src/utils/helperFunctions";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 const useTasks = () => {
   const [state, setState] = useState({
     isLoading: false,
   });
   const { setState: setTaskState } = useTaskContext();
-  const { addHeaders, fetchWithTimeOut, handleResponse, handleResponseError } =
+  const { getItem: getAccessToken } = useAsyncStorage("ACCESS_TOKEN");
+  const { fetchWithTimeOut, handleResponse, handleResponseError } =
     useHelpers();
 
   const fetchTaskFromServer = async () => {
-    console.log("fetchTaskFromServer");
-
     try {
       setState((prev) => ({
         ...prev,
         isLoading: true,
       }));
-
-      const headers = await addHeaders();
-
+      const accessToken = await getAccessToken();
       const requestOptions = {
         method: "GET",
-        headers,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
       };
       console.log(requestOptions, "<<<<<<<<<<<<<<<<<<<<");
 
