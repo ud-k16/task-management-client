@@ -4,7 +4,7 @@ import moderateScale from "@/src/utils/responsiveScale";
 import { Text, TextInput, useTheme } from "react-native-paper";
 import { useState } from "react";
 const EditTask = ({
-  onEdit = () => {},
+  onSave = () => {},
   task = "",
   description = "",
   hideEdit = () => {},
@@ -18,8 +18,7 @@ const EditTask = ({
   const { colors } = useTheme();
   const validation = () => {
     if (state.task && state.description) {
-      onEdit({
-        id,
+      onSave({
         task: state.task,
         description: state.description,
       });
@@ -47,31 +46,25 @@ const EditTask = ({
   };
   const styles = StyleSheet.create({
     editContainer: {
-      marginVertical: moderateScale(5),
-      rowGap: moderateScale(15),
+      marginVertical: moderateScale(15),
+      rowGap: moderateScale(20),
+      paddingHorizontal: moderateScale(15),
     },
 
-    taskTextStyle: {
-      fontWeight: 600,
-      fontSize: moderateScale(20),
-    },
-    descriptionTextStyle: {
-      color: colors.greyShade,
-    },
     actionButton: {
       alignSelf: "center",
-      width: moderateScale(100),
+      width: moderateScale(130),
       height: moderateScale(40),
       borderRadius: moderateScale(5),
       alignItems: "center",
       justifyContent: "center",
-      color: colors.white,
+      color: colors.onSecondary,
       backgroundColor: colors.secondary,
     },
     actionContainer: {
       alignSelf: "center",
       flexDirection: "row",
-      width: "80%",
+      width: "100%",
       justifyContent: "space-evenly",
     },
     errorTextStyle: {
@@ -99,7 +92,6 @@ const EditTask = ({
           }))
         }
       />
-
       <TextInput
         multiline
         defaultValue={state.description ?? ""}
@@ -116,9 +108,10 @@ const EditTask = ({
           }))
         }
       />
-      {(state.descriptionError || state.taskError) && (
-        <Text style={styles.errorTextStyle}> *Fill All Fields</Text>
-      )}
+
+      <Text style={styles.errorTextStyle}>
+        {(state.descriptionError || state.taskError) && "*Fill All Fields"}
+      </Text>
       <View style={styles.actionContainer}>
         <Pressable
           style={styles.actionButton}
