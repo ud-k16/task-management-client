@@ -35,7 +35,7 @@ export const fetchWithTimeOut = async ({
 export const handleResponseError = (error) => {
   try {
     if (error instanceof TypeError) {
-      handleNetworkError(error);
+      console.log("Network Error ");
     } else if (error instanceof DOMException && error.name === "AbortError") {
       console.log("Fetch request aborted");
     } else console.log(error.message);
@@ -44,13 +44,6 @@ export const handleResponseError = (error) => {
   }
 };
 
-export const handleNetworkError = (error) => {
-  try {
-    console.log(error);
-  } catch (error) {
-    console.log("Error in handle Network Error function");
-  }
-};
 /**
  * common response handler
  * if status of response 200 then parses the response for data send by server
