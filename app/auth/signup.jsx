@@ -42,7 +42,7 @@ const SignUp = () => {
     },
     loginTextLink: {
       color: colors.primary,
-      marginTop: moderateScale(20),
+      marginTop: moderateScale(30),
       textAlign: "center",
     },
   });
@@ -73,7 +73,7 @@ const SignUp = () => {
       />
       <Text style={styles.errorTextStyle}>{passwordError}</Text>
       <Button
-        children="Login"
+        children="SignUp"
         loading={isLoading}
         mode="contained"
         style={styles.buttonStyle}

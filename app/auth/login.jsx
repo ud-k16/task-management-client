@@ -41,7 +41,7 @@ const Login = () => {
     },
     signUpTextLink: {
       color: colors.primary,
-      marginTop: moderateScale(20),
+      marginTop: moderateScale(40),
       textAlign: "center",
     },
   });
