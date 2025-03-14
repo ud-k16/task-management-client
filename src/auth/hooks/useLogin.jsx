@@ -6,6 +6,7 @@ import {
 } from "@/src/utils/helperFunctions";
 import { useAuthContext } from "@/src/auth/context/useAuthContext";
 import { getBaseUrl } from "../../utils/helperFunctions";
+import { Keyboard } from "react-native";
 
 const useLogin = () => {
   const [state, setState] = useState({
@@ -26,6 +27,8 @@ const useLogin = () => {
   };
   const authenticateUser = async ({}) => {
     try {
+      // hide keyboard
+      Keyboard.dismiss();
       setState((prev) => ({
         ...prev,
         isLoading: true,
