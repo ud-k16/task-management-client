@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { fetchWithTimeOut } from "@/src/utils/helperFunctions";
+import {
+  fetchWithTimeOut,
+  handleResponseError,
+} from "@/src/utils/helperFunctions";
 import { useAuthContext } from "@/src/auth/context/useAuthContext";
 import { getBaseUrl } from "../../utils/helperFunctions";
 
@@ -91,6 +94,7 @@ const useLogin = () => {
         ...prev,
         isLoading: false,
       }));
+      handleResponseError(error);
     }
   };
 
