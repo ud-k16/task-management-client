@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTaskContext } from "../context/useTaskContext";
 import {
   addHeaders,
@@ -30,7 +30,7 @@ const useTasks = () => {
       });
       const result = await handleResponse(response);
       if (result?.status) {
-        setState((prev) => ({
+        setTaskState((prev) => ({
           ...prev,
           tasks: result.data,
         }));
@@ -47,6 +47,10 @@ const useTasks = () => {
       handleResponseError(error);
     }
   };
+
+  useEffect(() => {
+    fetchTaskFromServer();
+  }, []);
   return {
     ...state,
     fetchTaskFromServer,
