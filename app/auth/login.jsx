@@ -1,10 +1,44 @@
 import { View, StyleSheet } from "react-native";
-import { TextInput } from "react-native-paper";
+import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import useLogin from "@/src/auth/hooks/useLogin";
-import Header from "@/src/common/components/Header";
+import moderateScale from "@/src/utils/responsiveScale";
 
 const Login = () => {
-  const { email, password, setState } = useLogin();
+  const {
+    isLoading,
+    email,
+    password,
+    emailError,
+    passwordError,
+    setState,
+    authenticateUser,
+  } = useLogin();
+  const { colors } = useTheme();
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      paddingHorizontal: moderateScale(10),
+
+      backgroundColor: colors.background,
+    },
+    buttonStyle: {
+      width: moderateScale(150),
+      height: moderateScale(50),
+      alignSelf: "center",
+      borderRadius: moderateScale(5),
+    },
+    buttonContentStyle: {
+      height: "100%",
+    },
+    buttonLabelStyle: {
+      fontSize: moderateScale(20),
+    },
+    errorTextStyle: {
+      color: colors.error,
+      marginBottom: moderateScale(20),
+    },
+  });
   return (
     <View style={styles.container}>
       <TextInput
@@ -13,20 +47,28 @@ const Login = () => {
         value={email}
         onChangeText={(text) => setState((prev) => ({ ...prev, email: text }))}
       />
+      <Text style={styles.errorTextStyle}>{emailError}</Text>
       <TextInput
         label="Password"
         mode="outlined"
         value={password}
+        secureTextEntry
         onChangeText={(text) =>
           setState((prev) => ({ ...prev, password: text }))
         }
       />
+      <Text style={styles.errorTextStyle}>{passwordError}</Text>
+      <Button
+        children="Login"
+        loading={isLoading}
+        mode="contained"
+        style={styles.buttonStyle}
+        labelStyle={styles.buttonLabelStyle}
+        contentStyle={styles.buttonContentStyle}
+        onPress={authenticateUser}
+      />
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+
 export default Login;
