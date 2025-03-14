@@ -47,7 +47,7 @@ const EditTask = ({
   const styles = StyleSheet.create({
     editContainer: {
       marginVertical: moderateScale(15),
-      rowGap: moderateScale(20),
+      rowGap: moderateScale(10),
       paddingHorizontal: moderateScale(15),
     },
 
@@ -62,6 +62,7 @@ const EditTask = ({
       backgroundColor: colors.secondary,
     },
     actionContainer: {
+      marginVertical: moderateScale(15),
       alignSelf: "center",
       flexDirection: "row",
       width: "100%",
@@ -71,10 +72,6 @@ const EditTask = ({
       alignSelf: "center",
       color: colors.error,
       fontWeight: 600,
-    },
-    errorStyle: {
-      borderColor: colors.error,
-      borderWidth: moderateScale(2),
     },
   });
   return (
