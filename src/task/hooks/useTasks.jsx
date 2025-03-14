@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import { useTaskContext } from "../context/useTaskContext";
-import {
-  addHeaders,
-  fetchWithTimeOut,
-  handleResponse,
-  handleResponseError,
-} from "@/src/utils/helperFunctions";
+import useHelpers from "@/src/utils/helperFunctions";
 
 const useTasks = () => {
   const [state, setState] = useState({
     isLoading: false,
   });
   const { setState: setTaskState } = useTaskContext();
+  const { addHeaders, fetchWithTimeOut, handleResponse, handleResponseError } =
+    useHelpers();
 
   const fetchTaskFromServer = async () => {
     console.log("fetchTaskFromServer");
@@ -21,12 +18,15 @@ const useTasks = () => {
         ...prev,
         isLoading: true,
       }));
-      const headers = addHeaders();
+
+      const headers = await addHeaders();
+
       const requestOptions = {
         method: "GET",
         headers,
-        body: JSON.stringify(data),
       };
+      console.log(requestOptions, "<<<<<<<<<<<<<<<<<<<<");
+
       const response = await fetchWithTimeOut({
         url: `${process.env.EXPO_PUBLIC_BASE_API_URL_PRODUCTION}/tasks`,
         requestOptions,
