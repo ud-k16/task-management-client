@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTaskContext } from "../context/useTaskContext";
 import useHelpers from "@/src/utils/helperFunctions";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import { Keyboard } from "react-native";
 
 const useTasks = () => {
   const [state, setState] = useState({
@@ -61,6 +62,7 @@ const useTasks = () => {
 
   const addTaskToServer = async ({ title = "", description = "" }) => {
     try {
+      Keyboard.dismiss();
       const data = {
         title,
         description,
@@ -111,6 +113,7 @@ const useTasks = () => {
 
   const updateTaskToServer = async ({ id, title = "", description = "" }) => {
     try {
+      Keyboard.dismiss();
       const data = {
         title,
         description,
