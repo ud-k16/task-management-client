@@ -1,7 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import useSignUp from "../../src/auth/hooks/useSignUp";
-import { Button, Text, TextInput, useTheme } from "react-native-paper";
+import {
+  Button,
+  Snackbar,
+  Text,
+  TextInput,
+  useTheme,
+} from "react-native-paper";
 import moderateScale from "@/src/utils/responsiveScale";
+import { useErrorContext } from "@/src/common/context/useErrorContext";
 import { Link } from "expo-router";
 const SignUp = () => {
   const { colors } = useTheme();
@@ -16,22 +23,23 @@ const SignUp = () => {
     setState,
     signupUser,
   } = useSignUp();
+  const { errorVisible, errorMessage, hideError } = useErrorContext();
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "center",
       paddingHorizontal: moderateScale(10),
-
       backgroundColor: colors.background,
     },
     buttonStyle: {
-      width: moderateScale(150),
+      width: moderateScale(180),
       height: moderateScale(50),
       alignSelf: "center",
       borderRadius: moderateScale(5),
     },
     buttonContentStyle: {
       height: "100%",
+      width: "100%",
     },
     buttonLabelStyle: {
       fontSize: moderateScale(20),
@@ -84,6 +92,9 @@ const SignUp = () => {
       <Link href={"/auth/login"} style={styles.loginTextLink}>
         already has an account ? click here to login
       </Link>
+      <Snackbar visible={errorVisible} onDismiss={hideError} duration={5000}>
+        {errorMessage ?? "Try again"}
+      </Snackbar>
     </View>
   );
 };

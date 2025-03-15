@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { fetchWithTimeOut } from "@/src/utils/helperFunctions";
-import { useAuthContext } from "@/src/auth/context/useAuthContext";
+import useHelpers from "@/src/utils/helperFunctions";
+import { router } from "expo-router";
+import { useErrorContext } from "@/src/common/context/useErrorContext";
+
 const useSignUp = () => {
   const [state, setState] = useState({
     isLoading: false,
@@ -11,12 +12,9 @@ const useSignUp = () => {
     nameError: "",
     emailError: "",
     passwordError: "",
-    signUpError: false,
   });
-
-  const { setItem: setUser } = useAsyncStorage("user");
-  const { setState: setAuthState } = useAuthContext();
-
+  const { fetchWithTimeOut } = useHelpers();
+  const { showError } = useErrorContext();
   const validateEmail = () => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(state.email);
@@ -26,7 +24,7 @@ const useSignUp = () => {
       setState((prev) => ({
         ...prev,
         isLoading: true,
-        signUpError: "",
+        nameError: "",
         emailError: "",
         passwordError: "",
       }));
@@ -50,6 +48,7 @@ const useSignUp = () => {
         return;
       }
       const data = {
+        name: state.name,
         email: state.email,
         password: state.password,
       };
@@ -67,20 +66,9 @@ const useSignUp = () => {
 
       const result = await response.json();
       if (result.status) {
-        await setUser(JSON.stringify(result?.data));
-        // updating auth context values
-        setAuthState((prev) => {
-          return {
-            ...prev,
-            authenticated: true,
-            user: result.data,
-          };
-        });
+        router.navigate("/auth/login");
       } else {
-        setState((prev) => ({
-          ...prev,
-          signUpError: "Something went wrong",
-        }));
+        showError();
       }
       // toggle loading indicator
       setState((prev) => ({
@@ -93,6 +81,7 @@ const useSignUp = () => {
         isLoading: false,
       }));
     }
+    showError();
   };
 
   return {
