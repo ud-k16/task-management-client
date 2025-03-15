@@ -2,6 +2,7 @@ import { useState } from "react";
 import useHelpers from "@/src/utils/helperFunctions";
 import { router } from "expo-router";
 import { useErrorContext } from "@/src/common/context/useErrorContext";
+import { Keyboard } from "react-native";
 
 const useSignUp = () => {
   const [state, setState] = useState({
@@ -21,6 +22,7 @@ const useSignUp = () => {
   };
   const signupUser = async ({}) => {
     try {
+      Keyboard.dismiss();
       setState((prev) => ({
         ...prev,
         isLoading: true,
@@ -65,10 +67,14 @@ const useSignUp = () => {
       });
 
       const result = await response.json();
+      console.log(
+        "signup response from server",
+        JSON.stringify(result, null, 4)
+      );
       if (result.status) {
         router.navigate("/auth/login");
       } else {
-        showError();
+        showError(result?.message);
       }
       // toggle loading indicator
       setState((prev) => ({
@@ -80,8 +86,8 @@ const useSignUp = () => {
         ...prev,
         isLoading: false,
       }));
+      showError();
     }
-    showError();
   };
 
   return {

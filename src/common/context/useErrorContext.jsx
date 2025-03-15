@@ -5,11 +5,18 @@ const ErrorContext = createContext();
 const ErrorContextProvider = ({ children }) => {
   const [state, setState] = useState({
     errorVisible: false,
-    errorMessage: "Something Went Wrong!, Try again after sometime",
+    errorMessage: "",
   });
-  const showError = () => setState((prev) => ({ ...prev, errorVisible: true }));
+  const showError = (message) => {
+    setState((prev) => ({
+      ...prev,
+      errorVisible: true,
+      errorMessage: message ?? "Something Went Wrong!, Try again",
+    }));
+  };
+
   const hideError = () =>
-    setState((prev) => ({ ...prev, errorVisible: false }));
+    setState((prev) => ({ ...prev, errorVisible: false, errorMessage: "" }));
   return (
     <ErrorContext.Provider value={{ ...state, setState, showError, hideError }}>
       {children}
