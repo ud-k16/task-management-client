@@ -7,7 +7,6 @@ import { Text, useTheme } from "react-native-paper";
 import EditTask from "./editTask";
 
 const TaskCard = ({
-  id = 0,
   task,
   description,
   editable = false,
@@ -61,7 +60,12 @@ const TaskCard = ({
   return (
     <View style={styles.container}>
       {!!editVisible && !!editable ? (
-        <EditTask hideEdit={hideEdit} />
+        <EditTask
+          hideEdit={hideEdit}
+          onSave={onEdit}
+          task={task}
+          description={description}
+        />
       ) : (
         <View style={styles.courseDatacontainer}>
           <View style={styles.displayStack1}>

@@ -13,6 +13,7 @@ const ModifyTask = () => {
     snackBarVisibility,
     deleteTaskToServer,
     hideSnackBar,
+    updateTaskToServer,
   } = useTasks();
   const { colors } = useTheme();
   const styles = StyleSheet.create({
@@ -31,6 +32,9 @@ const ModifyTask = () => {
             description={item.description}
             task={item.title}
             editable={true}
+            onEdit={({ title, description }) => {
+              updateTaskToServer({ id: item._id, title, description });
+            }}
             onDelete={() => {
               deleteTaskToServer(item._id);
             }}

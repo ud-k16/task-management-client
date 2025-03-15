@@ -143,11 +143,15 @@ const useTasks = () => {
       setState((prev) => ({
         ...prev,
         isLoading: false,
+        snackBarVisibility: true,
+        snackBarMessage: "Task Modified",
       }));
     } catch (error) {
       setState((prev) => ({
         ...prev,
         isLoading: false,
+        snackBarVisibility: true,
+        snackBarMessage: "Task Unable To Modify",
       }));
       handleResponseError(error);
     }
