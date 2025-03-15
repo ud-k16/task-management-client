@@ -181,11 +181,15 @@ const useTasks = () => {
       setState((prev) => ({
         ...prev,
         isLoading: false,
+        snackBarVisibility: true,
+        snackBarMessage: "Task Deleted",
       }));
     } catch (error) {
       setState((prev) => ({
         ...prev,
         isLoading: false,
+        snackBarVisibility: true,
+        snackBarMessage: "Task Unable To Delete",
       }));
       handleResponseError(error);
     }
