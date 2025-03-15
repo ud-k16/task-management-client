@@ -21,7 +21,7 @@ const Login = () => {
     setState,
     authenticateUser,
   } = useLogin();
-  const { errorVisible, errorMessage, hideError } = useErrorContext;
+  const { errorVisible, errorMessage, hideError } = useErrorContext();
   const { colors } = useTheme();
   const styles = StyleSheet.create({
     container: {

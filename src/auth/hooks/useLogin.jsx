@@ -89,6 +89,7 @@ const useLogin = () => {
           ...prev,
           loginError: "Invalid credentials",
         }));
+        showError();
       }
       // toggle loading indicator
       setState((prev) => ({
