@@ -19,7 +19,7 @@ const EditTask = ({
   const validation = () => {
     if (state.task && state.description) {
       onSave({
-        task: state.task,
+        title: state.task,
         description: state.description,
       });
       hideEdit();
@@ -36,11 +36,9 @@ const EditTask = ({
     hideEdit();
     setState((prev) => ({
       ...prev,
-      task,
-      description,
-
+      task: "",
+      description: "",
       taskError: "",
-
       descriptionError: "",
     }));
   };
@@ -77,7 +75,7 @@ const EditTask = ({
   return (
     <View style={styles.editContainer}>
       <TextInput
-        defaultValue={state.task ?? ""}
+        value={state.task ?? ""}
         mode="outlined"
         placeholderTextColor={colors.outline}
         activeOutlineColor={state.taskError ? colors.error : colors.secondary}
@@ -91,7 +89,7 @@ const EditTask = ({
       />
       <TextInput
         multiline
-        defaultValue={state.description ?? ""}
+        value={state.description ?? ""}
         placeholder="Task Description"
         placeholderTextColor={colors.outline}
         textAlignVertical="top"
