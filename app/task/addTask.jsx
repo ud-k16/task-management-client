@@ -10,7 +10,7 @@ const AddTask = () => {
     snackBarVisibility,
     snackBarMessage,
     hideSnackBar,
-  } = useTasks();
+  } = useTasks({ fetchOnMount: false });
   const { colors } = useTheme();
   const styles = StyleSheet.create({
     container: {

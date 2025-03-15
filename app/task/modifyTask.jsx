@@ -11,10 +11,11 @@ const ModifyTask = () => {
     isLoading,
     snackBarMessage,
     snackBarVisibility,
+    fetchTaskFromServer,
     deleteTaskToServer,
     hideSnackBar,
     updateTaskToServer,
-  } = useTasks();
+  } = useTasks({});
   const { colors } = useTheme();
   const styles = StyleSheet.create({
     container: {
@@ -40,6 +41,8 @@ const ModifyTask = () => {
             }}
           />
         )}
+        refreshing={isLoading}
+        onRefresh={fetchTaskFromServer}
         data={tasks}
         ListEmptyComponent={<EmptyContent />}
       />

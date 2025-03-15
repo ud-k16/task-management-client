@@ -4,7 +4,7 @@ import useHelpers from "@/src/utils/helperFunctions";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { Keyboard } from "react-native";
 
-const useTasks = () => {
+const useTasks = ({ fetchOnMount = true }) => {
   const [state, setState] = useState({
     isLoading: false,
     snackBarVisibility: false,
@@ -202,7 +202,7 @@ const useTasks = () => {
     }
   };
   useEffect(() => {
-    fetchTaskFromServer();
+    fetchOnMount && fetchTaskFromServer();
   }, []);
   return {
     ...state,
