@@ -72,6 +72,7 @@ const useLogin = () => {
 
       const result = await response.json();
       if (result.status) {
+        console.log(result);
         await setUser(JSON.stringify(result.data.user));
         await setRefreshToken(result.data.token.refreshToken);
         await setAccessToken(result.data.token.accessToken);
@@ -85,6 +86,7 @@ const useLogin = () => {
           };
         });
       } else {
+        console.log(result);
         setState((prev) => ({
           ...prev,
           loginError: "Invalid credentials",
