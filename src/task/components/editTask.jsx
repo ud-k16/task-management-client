@@ -27,7 +27,6 @@ const EditTask = ({
       setState((prev) => ({
         ...prev,
         taskError: !Boolean(prev.task),
-
         descriptionError: !Boolean(prev.description),
       }));
     }
@@ -78,7 +77,7 @@ const EditTask = ({
         value={state.task ?? ""}
         mode="outlined"
         placeholderTextColor={colors.outline}
-        activeOutlineColor={state.taskError ? colors.error : colors.secondary}
+        outlineColor={state.taskError ? colors.error : colors.secondary}
         placeholder="Task Title "
         onChangeText={(text) =>
           setState((prev) => ({
@@ -95,7 +94,7 @@ const EditTask = ({
         textAlignVertical="top"
         mode="outlined"
         style={{ height: moderateScale(100) }}
-        activeOutlineColor={state.description ? colors.error : colors.secondary}
+        outlineColor={state.descriptionError ? colors.error : colors.secondary}
         onChangeText={(text) =>
           setState((prev) => ({
             ...prev,
