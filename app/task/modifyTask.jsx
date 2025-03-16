@@ -6,8 +6,10 @@ import Loader from "@/src/common/components/Loader";
 import EmptyContent from "@/app/common/EmptyScreen";
 import { Snackbar, useTheme } from "react-native-paper";
 import moderateScale from "@/src/utils/responsiveScale";
+import { useCallback, useState } from "react";
 
 const ModifyTask = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const { tasks } = useTaskContext();
   const {
     isLoading,
@@ -16,6 +18,7 @@ const ModifyTask = () => {
     fetchTaskFromServer,
     deleteTaskToServer,
     hideSnackBar,
+    showSnackBar,
     updateTaskToServer,
   } = useTasks({});
   const { colors } = useTheme();
@@ -25,10 +28,19 @@ const ModifyTask = () => {
       backgroundColor: colors.background,
     },
   });
-
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await fetchTaskFromServer();
+    } catch (error) {
+      showSnackBar();
+    } finally {
+      setRefreshing(false);
+    }
+  }, []);
   return (
     <View style={styles.container}>
-      <Loader isLoading={isLoading} />
+      <Loader isLoading={isLoading && !refreshing} />
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
         <FlatList
           style={{
@@ -47,8 +59,8 @@ const ModifyTask = () => {
               }}
             />
           )}
-          refreshing={isLoading}
-          onRefresh={fetchTaskFromServer}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
           data={tasks}
           ListEmptyComponent={<EmptyContent />}
         />
