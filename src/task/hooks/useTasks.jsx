@@ -8,7 +8,7 @@ const useTasks = ({ fetchOnMount = true }) => {
   const [state, setState] = useState({
     isLoading: false,
     snackBarVisibility: false,
-    snackBarMessage: "",
+    snackBarMessage: "Something went wrong",
     defaultErrorMessage: "Something went wrong",
   });
   const showSnackBar = () =>
@@ -62,6 +62,11 @@ const useTasks = ({ fetchOnMount = true }) => {
         isLoading: false,
       }));
       handleResponseError(error);
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   };
 
@@ -113,6 +118,11 @@ const useTasks = ({ fetchOnMount = true }) => {
         snackBarMessage: "Unable To add Task",
       }));
       handleResponseError(error);
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   };
 
@@ -162,6 +172,11 @@ const useTasks = ({ fetchOnMount = true }) => {
         snackBarMessage: "Task Unable To Modify",
       }));
       handleResponseError(error);
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   };
   const deleteTaskToServer = async (id) => {
@@ -204,6 +219,11 @@ const useTasks = ({ fetchOnMount = true }) => {
         snackBarMessage: "Task Unable To Delete",
       }));
       handleResponseError(error);
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   };
   useEffect(() => {

@@ -64,9 +64,11 @@ const useHelpers = () => {
       } else if (response.status === 401) {
         handleUnAuthorizedError();
       } else if (response.status === 500) {
+        showError();
         // internal server error
       } else if (response.status === 400) {
         // bad request
+        showError();
       }
     } catch (error) {
       console.log("Error in handle Response function");

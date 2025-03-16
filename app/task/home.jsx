@@ -6,10 +6,13 @@ import Loader from "@/src/common/components/Loader";
 import EmptyContent from "@/app/common/EmptyScreen";
 import moderateScale from "@/src/utils/responsiveScale";
 import { useCallback, useState } from "react";
+import { Snackbar } from "react-native-paper";
+import { useErrorContext } from "@/src/common/context/useErrorContext";
 const TaskHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { tasks } = useTaskContext();
   const { isLoading, showSnackBar, fetchTaskFromServer } = useTasks({});
+  const { errorVisible, errorMessage, hideError } = useErrorContext();
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -43,6 +46,12 @@ const TaskHome = () => {
           ListEmptyComponent={<EmptyContent />}
         />
       </ScrollView>
+      <Snackbar
+        visible={errorVisible}
+        children={errorMessage}
+        onDismiss={hideError}
+        onIconPress={hideError}
+      />
     </View>
   );
 };
