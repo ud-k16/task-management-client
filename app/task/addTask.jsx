@@ -31,6 +31,7 @@ const AddTask = () => {
         onDismiss={hideSnackBar}
         visible={snackBarVisibility}
         children={snackBarMessage}
+        onIconPress={hideSnackBar}
       />
     </View>
   );
