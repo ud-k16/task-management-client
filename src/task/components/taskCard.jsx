@@ -1,5 +1,5 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Foundation from "@expo/vector-icons/Foundation";
 import { useState } from "react";
 import moderateScale from "@/src/utils/responsiveScale";
@@ -59,37 +59,39 @@ const TaskCard = ({
   });
   return (
     <View style={styles.container}>
-      {!!editVisible && !!editable ? (
-        <EditTask
-          hideEdit={hideEdit}
-          onSave={onEdit}
-          task={task}
-          description={description}
-        />
-      ) : (
-        <View style={styles.courseDatacontainer}>
-          <View style={styles.displayStack1}>
-            <Text style={styles.taskTextStyle}>{task}</Text>
-            <Text style={styles.descriptionTextStyle}>{description}</Text>
-          </View>
-          {!!editable && (
-            <View style={styles.displayStack3}>
-              <AntDesign
-                name="delete"
-                size={24}
-                color={colors.onSecondary}
-                onPress={onDelete}
-              />
-              <Foundation
-                name="page-edit"
-                size={24}
-                color={colors.onSecondary}
-                onPress={showEdit}
-              />
+      <ScrollView>
+        {!!editVisible && !!editable ? (
+          <EditTask
+            hideEdit={hideEdit}
+            onSave={onEdit}
+            task={task}
+            description={description}
+          />
+        ) : (
+          <View style={styles.courseDatacontainer}>
+            <View style={styles.displayStack1}>
+              <Text style={styles.taskTextStyle}>{task}</Text>
+              <Text style={styles.descriptionTextStyle}>{description}</Text>
             </View>
-          )}
-        </View>
-      )}
+            {!!editable && (
+              <View style={styles.displayStack3}>
+                <AntDesign
+                  name="delete"
+                  size={24}
+                  color={colors.onSecondary}
+                  onPress={onDelete}
+                />
+                <Foundation
+                  name="page-edit"
+                  size={24}
+                  color={colors.onSecondary}
+                  onPress={showEdit}
+                />
+              </View>
+            )}
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };
