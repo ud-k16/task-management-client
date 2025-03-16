@@ -57,39 +57,37 @@ const TaskCard = ({
   });
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {!!editVisible && !!editable ? (
-          <EditTask
-            hideEdit={hideEdit}
-            onSave={onEdit}
-            task={task}
-            description={description}
-          />
-        ) : (
-          <View style={styles.courseDatacontainer}>
-            <View style={styles.displayStack1}>
-              <Text style={styles.taskTextStyle}>{task}</Text>
-              <Text style={styles.descriptionTextStyle}>{description}</Text>
-            </View>
-            {!!editable && (
-              <View style={styles.displayStack3}>
-                <AntDesign
-                  name="delete"
-                  size={24}
-                  color={colors.primary}
-                  onPress={onDelete}
-                />
-                <Foundation
-                  name="page-edit"
-                  size={24}
-                  color={colors.primary}
-                  onPress={showEdit}
-                />
-              </View>
-            )}
+      {!!editVisible && !!editable ? (
+        <EditTask
+          hideEdit={hideEdit}
+          onSave={onEdit}
+          task={task}
+          description={description}
+        />
+      ) : (
+        <View style={styles.courseDatacontainer}>
+          <View style={styles.displayStack1}>
+            <Text style={styles.taskTextStyle}>{task}</Text>
+            <Text style={styles.descriptionTextStyle}>{description}</Text>
           </View>
-        )}
-      </ScrollView>
+          {!!editable && (
+            <View style={styles.displayStack3}>
+              <AntDesign
+                name="delete"
+                size={24}
+                color={colors.primary}
+                onPress={onDelete}
+              />
+              <Foundation
+                name="page-edit"
+                size={24}
+                color={colors.primary}
+                onPress={showEdit}
+              />
+            </View>
+          )}
+        </View>
+      )}
     </View>
   );
 };

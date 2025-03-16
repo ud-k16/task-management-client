@@ -7,6 +7,7 @@ import AuthContextProvider from "@/src/auth/context/useAuthContext";
 import Header from "@/src/common/components/Header";
 import TaskContextProvider from "@/src/task/context/useTaskContext";
 import ErrorContextProvider from "@/src/common/context/useErrorContext";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   const [colorScheme, setColorScheme] = useState(Appearance.getColorScheme());
@@ -21,21 +22,23 @@ export default function RootLayout() {
 
   const isDarkMode = colorScheme === "dark";
   return (
-    <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <ErrorContextProvider>
-        <AuthContextProvider>
-          <TaskContextProvider>
-            <Stack
-              screenOptions={{
-                headerShown: true,
-                header: (props) => (
-                  <Header title={props.options.title} {...props} />
-                ),
-              }}
-            />
-          </TaskContextProvider>
-        </AuthContextProvider>
-      </ErrorContextProvider>
-    </PaperProvider>
+    <SafeAreaProvider>
+      <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <ErrorContextProvider>
+          <AuthContextProvider>
+            <TaskContextProvider>
+              <Stack
+                screenOptions={{
+                  headerShown: true,
+                  header: (props) => (
+                    <Header title={props.options.title} {...props} />
+                  ),
+                }}
+              />
+            </TaskContextProvider>
+          </AuthContextProvider>
+        </ErrorContextProvider>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }
