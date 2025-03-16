@@ -92,6 +92,7 @@ const useHelpers = () => {
       } else if (response.status === 401) {
         // loggout the user stating session expired
         logoutUser();
+        showError("Session Expired,Login again");
       }
     } catch (error) {
       handleResponseError(error);
