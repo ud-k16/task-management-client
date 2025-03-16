@@ -28,11 +28,11 @@ const TaskCard = ({
       width: "90%",
       alignSelf: "center",
       alignItems: "center",
-      backgroundColor: colors.secondary,
+      borderColor: colors.secondary,
+      borderWidth: moderateScale(2),
       marginVertical: moderateScale(5),
       padding: moderateScale(10),
       borderRadius: moderateScale(5),
-      elevation: 6,
     },
 
     displayStack1: {
@@ -47,11 +47,10 @@ const TaskCard = ({
       flex: 1,
       justifyContent: "space-evenly",
     },
-
     taskTextStyle: {
       fontWeight: 600,
       fontSize: moderateScale(20),
-      color: colors.onSecondary,
+      color: colors.primary,
     },
     descriptionTextStyle: {
       color: colors.outlineVariant,
@@ -78,13 +77,13 @@ const TaskCard = ({
                 <AntDesign
                   name="delete"
                   size={24}
-                  color={colors.onSecondary}
+                  color={colors.primary}
                   onPress={onDelete}
                 />
                 <Foundation
                   name="page-edit"
                   size={24}
-                  color={colors.onSecondary}
+                  color={colors.primary}
                   onPress={showEdit}
                 />
               </View>
