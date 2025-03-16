@@ -2,7 +2,7 @@ import { StyleSheet, View, Pressable } from "react-native";
 
 import moderateScale from "@/src/utils/responsiveScale";
 import { Text, TextInput, useTheme } from "react-native-paper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const EditTask = ({
   onSave = () => {},
   task = "",
@@ -16,13 +16,14 @@ const EditTask = ({
     descriptionError: "",
   });
   const { colors } = useTheme();
+  // valid fields for is field empty
   const validation = () => {
     if (state.task && state.description) {
       onSave({
         title: state.task,
         description: state.description,
       });
-      hideEdit();
+      resetState();
     } else {
       setState((prev) => ({
         ...prev,
@@ -31,6 +32,7 @@ const EditTask = ({
       }));
     }
   };
+  // clears state and hides the edit component
   const resetState = () => {
     hideEdit();
     setState((prev) => ({
@@ -41,6 +43,7 @@ const EditTask = ({
       descriptionError: "",
     }));
   };
+
   const styles = StyleSheet.create({
     editContainer: {
       marginVertical: moderateScale(15),
