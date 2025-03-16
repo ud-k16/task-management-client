@@ -22,8 +22,7 @@ const TaskCard = ({
   const styles = StyleSheet.create({
     container: {},
     courseDatacontainer: {
-      minHeight: moderateScale(50),
-      height: moderateScale(100),
+      minHeight: moderateScale(100),
       flexDirection: "row",
       width: "90%",
       alignSelf: "center",
@@ -53,7 +52,7 @@ const TaskCard = ({
       color: colors.primary,
     },
     descriptionTextStyle: {
-      color: colors.outlineVariant,
+      color: colors.onBackground,
     },
   });
   return (
