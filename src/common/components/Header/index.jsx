@@ -46,10 +46,10 @@ const Header = ({ title = "Task Management" }) => {
         >
           <Menu.Item
             title="Logout"
-            onPress={logoutUser}
-            // trailingIcon={
-            //   <MaterialIcons name="account-circle" size={24} color="black" />
-            // }
+            onPress={() => {
+              hideModal();
+              logoutUser();
+            }}
           />
         </Menu>
       </View>
