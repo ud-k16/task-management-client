@@ -9,11 +9,16 @@ const useTasks = ({ fetchOnMount = true }) => {
     isLoading: false,
     snackBarVisibility: false,
     snackBarMessage: "",
+    defaultErrorMessage: "Something went wrong",
   });
   const showSnackBar = () =>
     setState((prev) => ({ ...prev, snackBarVisibility: true }));
   const hideSnackBar = () =>
-    setState((prev) => ({ ...prev, snackBarVisibility: false }));
+    setState((prev) => ({
+      ...prev,
+      snackBarVisibility: false,
+      snackBarMessage: state.defaultErrorMessage,
+    }));
   const { setState: setTaskState } = useTaskContext();
   const { getItem: getAccessToken } = useAsyncStorage("ACCESS_TOKEN");
   const { fetchWithTimeOut, handleResponse, handleResponseError } =
