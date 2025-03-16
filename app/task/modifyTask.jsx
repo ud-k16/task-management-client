@@ -5,6 +5,7 @@ import useTasks from "@/src/task/hooks/useTasks";
 import Loader from "@/src/common/components/Loader";
 import EmptyContent from "@/app/common/EmptyScreen";
 import { Snackbar, useTheme } from "react-native-paper";
+
 const ModifyTask = () => {
   const { tasks } = useTaskContext();
   const {
@@ -50,6 +51,7 @@ const ModifyTask = () => {
         visible={snackBarVisibility}
         children={snackBarMessage}
         onDismiss={hideSnackBar}
+        onIconPress={hideSnackBar}
       />
     </View>
   );
