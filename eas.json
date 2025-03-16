@@ -1,7 +1,10 @@
 {
   "build": {
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_BASE_API_URL_PRODUCTION": "https://task-management-server-s2m0.onrender.com/api"
+      }
     }
   }
 }
