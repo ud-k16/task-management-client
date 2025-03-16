@@ -8,8 +8,8 @@ import { useErrorContext } from "@/src/common/context/useErrorContext";
 const useLogin = () => {
   const [state, setState] = useState({
     isLoading: false,
-    email: "forjust224@gmail.com",
-    password: "1234",
+    email: "",
+    password: "",
     emailError: "",
     passwordError: "",
     loginError: false,
