@@ -86,7 +86,12 @@ const Login = () => {
       <Link href={"/auth/signup"} style={styles.signUpTextLink}>
         Signup to create an account
       </Link>
-      <Snackbar visible={errorVisible} onDismiss={hideError} duration={5000}>
+      <Snackbar
+        visible={errorVisible}
+        onDismiss={hideError}
+        duration={5000}
+        onIconPress={hideError}
+      >
         {errorMessage ?? "Try again"}
       </Snackbar>
     </View>

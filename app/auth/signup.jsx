@@ -94,7 +94,12 @@ const SignUp = () => {
       <Link href={"/auth/login"} style={styles.loginTextLink}>
         already has an account ? click here to login
       </Link>
-      <Snackbar visible={errorVisible} onDismiss={hideError} duration={5000}>
+      <Snackbar
+        visible={errorVisible}
+        onDismiss={hideError}
+        duration={5000}
+        onIconPress={hideError}
+      >
         {errorMessage ?? "Try again"}
       </Snackbar>
     </View>
