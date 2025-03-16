@@ -58,6 +58,7 @@ const Login = () => {
       <TextInput
         label="Email"
         mode="outlined"
+        autoCapitalize="none"
         value={email}
         onChangeText={(text) => setState((prev) => ({ ...prev, email: text }))}
       />
@@ -66,6 +67,7 @@ const Login = () => {
         label="Password"
         mode="outlined"
         value={password}
+        autoCapitalize="none"
         secureTextEntry
         onChangeText={(text) =>
           setState((prev) => ({ ...prev, password: text }))

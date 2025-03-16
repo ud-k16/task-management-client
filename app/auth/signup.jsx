@@ -68,9 +68,11 @@ const SignUp = () => {
         mode="outlined"
         value={email}
         onChangeText={(text) => setState((prev) => ({ ...prev, email: text }))}
+        autoCapitalize="none"
       />
       <Text style={styles.errorTextStyle}>{emailError}</Text>
       <TextInput
+        autoCapitalize="none"
         label="Password"
         mode="outlined"
         value={password}
