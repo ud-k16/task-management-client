@@ -20,41 +20,41 @@ Features & Screens:
 
 ## Authentication:
 
-# Signup Screen:
+### Signup Screen:
 
 Users can register with name, email, password.
 
-# Login Screen:
+### Login Screen:
 
 Users can log in using email and password.
 Implemented token-based authentication using AsyncStorage to store JWT.[access token and refresh token]
 
 ## Task Management:
 
-# Home Screen:
+### Home Screen:
 
 Fetch and display tasks from the backend.
 Implemented pull-to-refresh.
 
-# Add Task Screen:
+### Add Task Screen:
 
 Allow users to create a task (title + description).
 
-# Task Details Screen:
+### Task Details Screen:
 
 Display task details.
 Allow users to edit or delete tasks.
 
-# Logout:
+## Logout:
 
 logout button that clears the stored token and navigates to the Login screen.
 
 ## Tech Stack & Tools:
 
-# State Management: React Context API
+#### State Management: React Context API
 
-# Navigation: React Navigation (Stack Navigator) [Expo Managed File-based routing]
+#### Navigation: React Navigation (Stack Navigator) [Expo Managed File-based routing]
 
-# Storage: AsyncStorage for storing JWT tokens
+#### Storage: AsyncStorage for storing JWT tokens
 
-# UI: React Native Paper
+#### UI: React Native Paper
