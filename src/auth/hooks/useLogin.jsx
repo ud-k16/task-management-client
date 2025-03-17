@@ -99,11 +99,12 @@ const useLogin = () => {
         isLoading: false,
       }));
     } catch (error) {
+      showError();
+    } finally {
       setState((prev) => ({
         ...prev,
         isLoading: false,
       }));
-      showError();
     }
   };
 
